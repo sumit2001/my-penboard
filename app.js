@@ -10,7 +10,7 @@ let server=app.listen(port,()=>{
     console.log("Listening to port "+port);
 })
 
-let io=socket(server);
+let io=socket.listen(server);
 
 io.on("connection",(socket)=>{
     console.log("Made Socket Connection");
