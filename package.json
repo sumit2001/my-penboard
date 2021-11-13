@@ -9,7 +9,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node app.js"
+    "start":"node app.js",
+    "ng": "ng",
+    "build": "ng build --prod",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "author": "",
   "license": "ISC",
