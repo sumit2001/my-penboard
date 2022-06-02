@@ -37,17 +37,25 @@ function closeTools() {
     eraserToolCont.style.display = "none";
 }
 
+const closeBothContainers = () => {
+    pencilToolCont.style.display = "none";
+    eraserToolCont.style.display = "none";
+}
+
 pencil.addEventListener("click", (e) => {
+    eraserToolCont.style.display = "none";
     pencilFlag = !pencilFlag;
+    eraserFlag = false;
+    document.body.style.setProperty('cursor', 'url(/Icons/Pencil.cur), default');
     if (pencilFlag) {
         pencilToolCont.style.display = "block";
-        document.body.style.setProperty('cursor', 'url(/Icons/Pencil.cur), default');
     }
     else {
         pencilToolCont.style.display = "none";
     }
 })
 eraser.addEventListener("click", (e) => {
+    pencilToolCont.style.display = "none";
     eraserFlag = !eraserFlag;
     if (eraserFlag) {
         eraserToolCont.style.display = "flex";
