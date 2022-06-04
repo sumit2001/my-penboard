@@ -9,6 +9,7 @@ let body = document.querySelector("body");
 let optionsCont = document.querySelector(".options-cont");
 let pencilFlag = false;
 let eraserFlag = false;
+let eraserToolsFlag = false;
 let optionsFlag = true;
 
 //true-->show , false--> hide 
@@ -37,10 +38,6 @@ function closeTools() {
     eraserToolCont.style.display = "none";
 }
 
-const closeBothContainers = () => {
-    pencilToolCont.style.display = "none";
-    eraserToolCont.style.display = "none";
-}
 
 pencil.addEventListener("click", (e) => {
     eraserToolCont.style.display = "none";
@@ -56,15 +53,16 @@ pencil.addEventListener("click", (e) => {
 })
 eraser.addEventListener("click", (e) => {
     pencilToolCont.style.display = "none";
-    eraserFlag = !eraserFlag;
-    if (eraserFlag) {
+    eraserToolsFlag = !eraserToolsFlag;
+    eraserFlag = true;
+    if (eraserToolsFlag) {
         eraserToolCont.style.display = "flex";
         document.body.style.setProperty('cursor', 'url(/Icons/Eraser.cur), default');
     }
     else {
         eraserToolCont.style.display = "none";
-        document.body.style.setProperty('cursor', 'url(/Icons/Pencil.cur), default');
     }
+
 })
 
 
@@ -107,6 +105,7 @@ sticky.addEventListener("click", (e) => {
 function createSticky(stickyTemplateHTML) {
     let stickyCont = document.createElement("div");
     stickyCont.setAttribute("class", "sticky-cont");
+    stickyCont.style.cursor = "pointer"
     stickyCont.innerHTML = stickyTemplateHTML;
 
     document.body.appendChild(stickyCont);
