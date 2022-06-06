@@ -28,9 +28,7 @@ tool.lineWidth = penWidth;
 const onRun = () => {
     let url = canvas.toDataURL();
     undoRedoTracker[0] = url;
-    track++;
 }
-
 onRun();
 
 const closeBothContainers = () => {
@@ -59,12 +57,9 @@ canvas.addEventListener("mousemove", (e) => {
     }
 })
 canvas.addEventListener("mouseup", (e) => {
-    mouseDown = false;
-
     let url = canvas.toDataURL();
-    undoRedoTracker[track] = url;
-    track++;
-    // console.log(url);
+    undoRedoTracker[++track] = url;
+    mouseDown = false;
 })
 
 undo.addEventListener("click", (e) => {
@@ -73,23 +68,15 @@ undo.addEventListener("click", (e) => {
         trackValue: track - 1,
         undoRedoTracker
     }
-    // undoRedoCanvas(data);
-    console.log(data);
-
     socket.emit("redoUndo", data);
-    if (track != 1)
-        track--;
 })
 redo.addEventListener("click", (e) => {
-    if (track == undoRedoTracker.length) return;
+    if (track == undoRedoTracker.length - 1) return;
     let data = {
-        trackValue: track,
+        trackValue: track + 1,
         undoRedoTracker
     }
-
     socket.emit("redoUndo", data);
-    // console.log(data);
-    if (track < undoRedoTracker.length - 1) track++;
 })
 
 function undoRedoCanvas(trackObj) {
@@ -102,7 +89,6 @@ function undoRedoCanvas(trackObj) {
     img.onload = () => {
         tool.drawImage(img, 0, 0, canvas.width, canvas.height);
     }
-    console.log(url);
 }
 
 function beginPath(strokeObj) {
